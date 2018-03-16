@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <div class="main-content" id="">
+    <div class="all-products page">
+      <div class="sub-categories">
+        <ul id="data-categories" class="category-list">
+          <script type="x-handlebars-template" id="categories-template">
+                  {{#each this}}
+                  <li data-id="{{id}}">
+                    <a href="#">{{name}}</a>
+                  </li>
+                {{/each}}
+              </script>
+        </ul>
+      </div>
+      <ul class="products-list ">
+        <script type="x-handlebars-template" id="products-template">
+              <div class="card-deck">
+                {{#each this}}
+                  <li data-index="{{id}}">
+                    <div class="card" style="width: 18rem;">
+                      <a href="#"><img class="card-img-top" src="{{thumbnail}}" alt="{{id}}"></a>
+                      <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{title}}</a></h5>
+                        <p class="card-text">S/{{price}}</p>
+                        <a href="#" class="btn btn-primary">Add a Carrito</a>
+                      </div>
+                    </div>
+                  </li>
+                {{/each}}
+              </div>
+            </script>
+      </ul>
+    </div>
+    <div class="single-product page">
+
+        <div class="overlay"></div>
+
+        <div class="preview-large">
+          <h3 class="text-center">Single product view</h3>
+          <img id="img-item" src=""/>
+          <img id="description" src=""/>
+
+          <span class="close">×</span>
+        </div>
+
+      </div>
+
+      <div class="error page">
+        <h3>Sorry, something went wrong :(</h3>
+      </div>
+  </div>
+
+
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+  <script src="js/minicart.js"></script>
+  <script src="js/app.js"></script>
+
+
+
+</body>
+
+</html>

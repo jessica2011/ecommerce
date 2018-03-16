@@ -1,0 +1,20 @@
+.box-categories{
+  border-right: 1px solid rgb(223, 223, 223);
+  z-index: 2 !important;
+}
+
+.list-group-item{
+	border-radius: 0px !important;
+	/* border-right: 0px; */
+}
+
+.img-card {
+	width: 90px;
+	height: 90px;
+	margin-top: 15px;
+}
+
+.banner{
+	height: 60vh;
+}
+
