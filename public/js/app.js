@@ -37,6 +37,7 @@ const begin = () =>{
 
  
   const uploadSearch = () => {
+    console.log('hola');
     let input = $('#searh-input');
     $('#btn-search').click(function(event) {
       event.preventDefault();
