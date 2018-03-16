@@ -7,8 +7,7 @@ Esta página web está basado en ofrecer servicio de venta de las mejores cámar
 ## Desarrollado para [Laboratoria](http://www.laboratoria.la/)
 
 ## Elaborado por:
-* Nataly Otero
-* Wendy Tamara
+
 * Jessica Meza
 
 
