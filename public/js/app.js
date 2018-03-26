@@ -19,7 +19,7 @@ const begin = () =>{
       let listCard = response.results;
       console.log(response.results);
       listCard.forEach((elem) => {
-        const templateList = `<div class="col-md-4 d-inline-block">
+        const templateList = `<div class="d-inline-block col-12 col-md-5 col-xl-4">
                                 <div class="text-center bg-light mb-3">
                                   <img class="card-img-top img-card" src="${elem.thumbnail}" alt="Card image cap">
                                   <div class="card-body">
@@ -35,13 +35,13 @@ const begin = () =>{
     });
   };
 
- 
+  let input = $('#searh-input');
   const uploadSearch = () => {
-    let input = $('#searh-input');
     $('#btn-search').click(function(event) {
-      event.preventDefault();
+      // event.preventDefault();
       $('#box-cards').html('');
       $('#box-cards2').html('');
+      $('#carouselExampleSlidesOnly').html('');
       $.getJSON(`https://api.mercadolibre.com/sites/MPE/search?condition=new&q=${input.val()}`, function(response) {
         let listCard = response.results;
         listCard.forEach((elem) => {
@@ -57,7 +57,7 @@ const begin = () =>{
                                </div>`;
           $('#box-cards2').append(templateList);
         });
-        input.val('');
+        // input.val('');
         addProductsCar();
       });
     });
@@ -94,7 +94,6 @@ const begin = () =>{
   page();
   uploadList();
   uploadCategories();
-  uploadSearch();
 };
 
 $(document).ready(begin);
