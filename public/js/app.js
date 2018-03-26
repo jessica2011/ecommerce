@@ -1,39 +1,73 @@
 const begin = () =>{
-  const uploadCategories = () =>{
-    $.getJSON('https://api.mercadolibre.com/sites/MPE/categories', function(response) {
-      let idCategories = [];
-      for (let i in response) {
-        idCategories = response[i].id;
-        // console.log(idCategories);
-      }
-      response.forEach((elem, i) => {
-        const templateCategories = `<a href="/${elem.id}" class="list-group-item list-group-item-action">${elem.name}</a>`;
-        $('#list-categories').append(templateCategories);
-      });
-    });
-  };
+  // const uploadCategories = () =>{
+  //   $.getJSON('https://api.mercadolibre.com/sites/MPE/categories', function(response) {
+  //     let idCategories = [];
+  //     for (let i in response) {
+  //       idCategories = response[i].id;
+  //       // console.log(idCategories);
+  //     }
+  //     response.forEach((elem, i) => {
+  //       const templateCategories = `<a href="/${elem.id}" class="list-group-item list-group-item-action">${elem.name}</a>`;
+  //       $('#list-categories').append(templateCategories);
+  //     });
+  //   });
+  // };
 
-  const uploadList = (ctx) => {
-    $('#box-cards').html('');
-    $.getJSON(`https://api.mercadolibre.com/sites/MPE/search?category=${ctx.params.listCategorie}`, function(response) {
-      let listCard = response.results;
-      console.log(response.results);
-      listCard.forEach((elem) => {
-        const templateList = `<div class="d-inline-block col-12 col-md-5 col-xl-4">
-                                <div class="text-center bg-light mb-3">
-                                  <img class="card-img-top img-card" src="${elem.thumbnail}" alt="Card image cap">
-                                  <div class="card-body">
-                                    <p class="card-title">${elem.title}</p>
-                                    <p class="card-title">S/. ${elem.price}</p>                                  
-                                    <input class="product btn btn-primary" type="button" precio=${elem.price} titulo=${elem.title} value="comprar"/>
-                                  </div>
-                                </div>
-                              </div>`;
-        $('#box-cards').append(templateList);
+  // const uploadList = (ctx) => {
+  //   $('#box-cards').html('');
+  //   const x = ctx.params.listCategorie;
+
+  //   $.getJSON(`https://api.mercadolibre.com/sites/MPE/search?category=${x}`, function(response) {
+  //     let listCard = response.results;
+  //     console.log(response.results);
+  //     listCard.forEach((elem) => {
+  //       const templateList = `<div class="d-inline-block col-12 col-md-5 col-xl-4">
+  //                               <div class="text-center bg-light mb-3">
+  //                                 <img class="card-img-top img-card" src="${elem.thumbnail}" alt="Card image cap">
+  //                                 <div class="card-body">
+  //                                   <p class="card-title">${elem.title}</p>
+  //                                   <p class="card-title">S/. ${elem.price}</p>                                  
+  //                                   <input class="product btn btn-primary" type="button" precio=${elem.price} titulo=${elem.title} value="comprar"/>
+  //                                 </div>
+  //                               </div>
+  //                             </div>`;
+  //       $('#box-cards').append(templateList);
+  //     });
+  //     addProductsCar();
+  //   });
+  // };
+  $.get('https://api.mercadolibre.com/sites/MPE/categories', function(response) {
+    console.log(response);
+    for (const elem of response) {
+      const templateCategories = `<a href="/${elem.id}" class="list-group-item list-group-item-action">${elem.name}</a>`;
+      $('#list-categories').append(templateCategories);
+  
+      page(`/${elem.id}`, function() {
+        $('#box-cards').html('');
+        $.ajax({
+          url: `https://api.mercadolibre.com/sites/MPE/search?category=${elem.id}`,
+          contentType: 'application/json',
+          success: function(data) {
+            for (const elem1 of data.results) {
+              const templateList = `<div class="d-inline-block col-12 col-md-5 col-xl-4">
+                                      <div class="text-center bg-light mb-3">
+                                        <img class="card-img-top img-card" src="${elem1.thumbnail}" alt="Card image cap">
+                                        <div class="card-body">
+                                          <p class="card-title">${elem1.title}</p>
+                                          <p class="card-title">S/. ${elem1.price}</p>                                  
+                                          <input class="product btn btn-primary" type="button" precio=${elem1.price} titulo=${elem1.title} value="comprar"/>
+                                        </div>
+                                      </div>
+                                    </div>`;
+              $('#box-cards').append(templateList);
+            }
+            addProductsCar();
+          }
+        });
       });
-      addProductsCar();
-    });
-  };
+      page();
+    }
+  });
 
   let input = $('#searh-input');
   const uploadSearch = () => {
@@ -85,15 +119,15 @@ const begin = () =>{
     });
   };
   
-  page('/', uploadCategories);
-  page('/:listCategorie', uploadList);
-  // page('/:categories/:id', list);
-  page('*', function() {
-    $('#contente-search').html('No se ha encontrado la búsqueda');
-  });
-  page();
-  uploadList();
-  uploadCategories();
+  // page('/', uploadCategories);
+  // page('/:listCategorie', uploadList);
+  // // page('/:categories/:id', list);
+  // page('*', function() {
+  //   $('#contente-search').html('No se ha encontrado la búsqueda');
+  // });
+  // page();
+  // uploadList();
+  // uploadCategories();
 };
 
 $(document).ready(begin);
